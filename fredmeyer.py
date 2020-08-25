@@ -3,9 +3,12 @@
 import requests
 from bs4 import BeautifulSoup
 from notify_run import Notify 
+from sense_hat import SenseHat
 
 import requests
 
+
+sense = SenseHat()
 notify = Notify() 
 
 threePack = "https://www.fredmeyer.com/p/clorox-disinfecting-wipes-value-pack/0004460030208"
@@ -20,11 +23,34 @@ def checker (site, name):
     ship_data = soup.find('label', attrs={"for": "SHIP"})
     
     status = ship_data.text
-    print(status)
-    
-    if "Unavailable" not in status:
-        notify.send(name + ": " + status)
+    return status
 
 def runCheck():
-    checker(threePack, "Clorox Three Pack Status:")
-    checker(fourPack, "Clorox Four Pack Status:")
+    
+    threePackResult = checker(threePack, "Clorox Three Pack Status:")
+    fourPackResult = checker(fourPack, "Clorox Four Pack Status:")
+    if "Unavailable" not in threePackResult and "Unavailable" not in fourPackResult:
+        notify.send("Three Pack Result: " + threePackResult + " Four Pack Result: " + fourPackResult)
+        print("Notification Sent")
+        o = [0, 255, 0]
+
+    else:
+        o = [255, 0, 0] 
+
+    display = [
+    O, O, O, O, O, O, O, O,
+    O, O, O, O, O, O, O, O,
+    O, O, O, O, O, O, O, O,
+    O, O, O, O, O, O, O, O,
+    O, O, O, O, O, O, O, O,
+    O, O, O, O, O, O, O, O,
+    O, O, O, O, O, O, O, O,
+    O, O, O, O, O, O, O, O
+    ]
+
+    sense.set_pixels(display)
+        
+           
+    print("Three Pack Result: " + threePackResult + " Four Pack Result: " + fourPackResult)
+
+runCheck()

@@ -3,7 +3,7 @@ import fredmeyer
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('interval', seconds=60)
+@sched.scheduled_job('interval', hours=1)
 
 def run():
     print("execute")
