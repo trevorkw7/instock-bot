@@ -17,7 +17,7 @@ def checker (site, name):
     response = requests.get(site, headers=headers)
     soup =  BeautifulSoup(response.content, "html.parser")
 
-    ship_data = soup.find('label', attrs={"for": "DELIVERY"})
+    ship_data = soup.find('label', attrs={"for": "SHIP"})
     
     status = ship_data.text
     print(status)
