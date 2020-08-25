@@ -32,10 +32,10 @@ def runCheck():
     if "Unavailable" not in threePackResult and "Unavailable" not in fourPackResult:
         notify.send("Three Pack Result: " + threePackResult + " Four Pack Result: " + fourPackResult)
         print("Notification Sent")
-        o = [0, 255, 0]
+        O = [0, 255, 0]
 
     else:
-        o = [255, 0, 0] 
+        O = [255, 0, 0] 
 
     display = [
     O, O, O, O, O, O, O, O,
